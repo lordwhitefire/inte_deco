@@ -1,9 +1,14 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
 
 export default {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ['./app/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [
+    // Add the @iconify/tailwind plugin
+    addDynamicIconSelectors(),
+  ],
+} satisfies Config
