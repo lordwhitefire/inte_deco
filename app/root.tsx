@@ -10,8 +10,13 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+
+
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
+
+import BannerComponent from './components/BannerComponent';
+import NavigationBar from './components/NavigationBar';
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -32,6 +37,8 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
+      <NavigationBar isMenuOpen={isMenuOpen} toggleMenuDropdown={toggleMenuDropdown} />
+      <BannerComponent />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
