@@ -1,198 +1,153 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 
-interface NavigationBarProps {
-  isExclusiveOpen: boolean;
-  toggleExclusiveDropdown: () => void;
-  setBannerIsExclusiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import logoImage from '../assets/logo/Logo.png';
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ isExclusiveOpen, toggleExclusiveDropdown, setBannerIsExclusiveOpen }) => {
-  const dropdownRef = useRef(null);
- const userMenuRef =  useRef(null);
+const NavigationBar = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
-const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // New state for user menu
-
-  const dropdownAnimation = useSpring({
-    opacity: isExclusiveOpen ? 1 : 0,
-    maxHeight: isExclusiveOpen ? 400 : 0,
+  const menuAnimation = useSpring({
+    opacity: isMenuOpen ? 1 : 0,
+    maxHeight: isMenuOpen ? 400 : 0,
   });
 
-useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        isUserMenuOpen && // Check if the user menu is open
-        userMenuRef.current &&
-        !userMenuRef.current.contains(event.target)
-      ) {
-        setIsUserMenuOpen(false);
-      }
-    };
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (isMenuOpen && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
+
+  // Attach click event listener to handle clicks outside the menu
+  useEffect(() => {
     document.addEventListener('click', handleClickOutside);
 
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [isUserMenuOpen, setIsUserMenuOpen]);
-useEffect(() => {
-  console.log('Navbar isExclusiveOpen:', isExclusiveOpen);
+  }, [isMenuOpen]);
 
-  const handleClickOutside = (event) => {
-  if (
-    isExclusiveOpen && // Check if the menu is open
-    dropdownRef.current &&
-    !dropdownRef.current.contains(event.target) &&
-    !event.target.classList.contains('balzac')
-  ) {
-    toggleExclusiveDropdown(false);
-  }
-};
+ 
+  return (
+    <nav className="bg-white fixed z-10 w-screen ">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div className="relative flex h-16 items-center justify-between">
+          <div className="flex flex-1 items-center justify-end sm:items-stretch sm:justify-center">
 
+            <div className="flex flex-shrink-0 items-center mt-2">
+              <img className="object-contain h-3 w-auto"src={logoImage} alt="Your Company" />
+            </div>
 
-  document.addEventListener('click', handleClickOutside);
+            <div className="hidden sm:block sm:ml-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-4">
 
-  return () => {
-    document.removeEventListener('click', handleClickOutside);
-  };
-}, [isExclusiveOpen, setBannerIsExclusiveOpen]);
+                {/* Container for input field */}
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 
+                    {/* The actual input field */}
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      autoComplete="username"
+                      className="block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="search"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  console.log('Navbar isExclusiveOpen:', isExclusiveOpen);
-  const userMenu = (
-<div className="relative">
-      <div>
-        <button
+            <div className="hidden sm:mt-2 sm:ml-[14.5rem] sm:block">
+
+              <div className="flex space-x-4">
+                {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
+                <a href="index.html" className="hover:bg-gray-900 text-black rounded-md px-3 py-2 text-sm font-medium hover:text-white" aria-current="page">Home</a>
+                <a href="services.html" className="text-black hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">services</a>
+                <a href="about.html" className="text-black hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
+                <a href="blog.html" className="text-black hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">blog</a>
+                <a href="contact.html" className="text-black hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact us</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="sm:hidden ml-4 mr-1 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-4">
+
+              {/* Container for input field */}
+              <div className="mt-2">
+                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                  {/* The actual input field */}
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    autoComplete="username"
+                    className="block flex-1 border-0 bg-transparent py-1.5 pl-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="search"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="inset-y-0 left-0 flex items-center sm:hidden">
+
+            {/* Mobile menu button*/}
+            <button
           type="button"
-          className="flex rounded-full  text-sm  focus:bg-red-500 focus:text-white  p-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 justify-center items-center"
-          aria-expanded={isUserMenuOpen}
-          aria-haspopup="true"
-          onClick={() => setIsUserMenuOpen((prev) => !prev)} // Use new state updater
+          className="relative inline-flex mr-4 items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          onClick={toggleMenu}
         >
-          <span className="sr-only">Open user menu</span>
-          <span className="icon-[lucide--user-round] w-5 h-5"></span>
+          <span className="absolute -inset-0.5"></span>
+          <span className="sr-only">Open main menu</span>
+          {/* Icon when menu is closed */}
+          <svg
+            className={`h-6 w-6 ${isMenuOpen ? 'hidden' : 'block'}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+          {/* Icon when menu is open */}
+          <svg
+            className={`h-6 w-6 ${isMenuOpen ? 'block' : 'hidden'}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
-      </div>
-
-      {isUserMenuOpen && (
-        <div
-          ref={userMenuRef}
-         // Adjusted classes for a glassy feeling
-className="absolute right-0 z-10 mt-4 w-[15rem] origin-top-right rounded-md bg-black/50 backdrop-blur-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="user-menu-button"
-          tabIndex="-1"
-        >
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-100 flex gap-x-4 items-center"
-            role="menuitem"
-            tabIndex="-1"
-            id="user-menu-item-0"
-          >
-            <span className="icon-[lucide--user-round] w-5 h-5"></span>
-            Manage my account
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-100 flex items-center gap-x-4"
-            role="menuitem"
-            tabIndex="-1"
-            id="user-menu-item-1"
-          >
-            <span className="icon-[ic--outline-border-color] w-5 h-5"></span>
-            My order
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-100 flex gap-x-4 items-center"
-            role="menuitem"
-            tabIndex="-1"
-            id="user-menu-item-2"
-          >
-            <span className="icon-[material-symbols--cancel-outline] w-5 h-5"></span>
-            Cancellation
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-100 flex gap-x-4 items-center"
-            role="menuitem"
-            tabIndex="-1"
-            id="user-menu-item-3"
-          >
-            <span className="icon-[material-symbols--star-outline] w-5 h-5"></span>
-            My reviews
-          </a>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-100 flex gap-x-4 items-center"
-            role="menuitem"
-            tabIndex="-1"
-            id="user-menu-item-4"
-          >
-            <span className="icon-[tabler--logout-2] w-5 h-5"></span>
-            Logout
-          </a>
+          </div>
         </div>
-      )}
-    </div>
-    );
 
-return (
-    <nav className="flex justify-around items-center p-4 text-neutral-900  ">
-      {/* Exclusive Dropdown */}
-      <div className="relative" ref={dropdownRef}>
-        <span
-          className="font-bold lg:text-xl cursor-pointer"
-          onClick={toggleExclusiveDropdown}
-        >
-          Exclusive
-        </span>
-        <animated.div
-          style={dropdownAnimation}
-          className="absolute top-[2.3rem] -left-[7.3rem] mt-2 w-[18rem] p-2 bg-white text-black border border-r-black text-center pb-6 pt-6  balzac"
-        >
-          {/* Dropdown content goes here */}
-          <p className="py-3">Dropdown Item 1</p>
-          <p className="py-3">Dropdown Item 2</p>
-          <p className="py-3">Dropdown Item 3</p>
-          <p className="py-3">Dropdown Item 4</p>
-          <p className="py-3">Dropdown Item 5</p>
-          <p className="py-3">Dropdown Item 4</p>
-          <p className="py-3">Dropdown Item 5</p>
-          {/* Add more dropdown items as needed */}
+        {/* Mobile menu, show/hide based on menu state. */}
+         <animated.div className={` bg-white/50 backdrop-blur-md mt-6 right-4 rounded-lg absolute sm:hidden`} ref={dropdownRef} style={menuAnimation}>
+          <div className=" space-y-1 pl-2 pr-40 pb-3 pt-2 ">
+            {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
+            <a href="index.html" className="text-black hover:text-white hover:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Home</a>
+            <a href="services.html" className="text-black hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">services</a>
+            <a href="about.html" className="text-black hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">About us</a>
+            <a href="blog.html" className="text-black hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">blog</a>
+            <a href="contact.html" className="text-black hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Contact us</a>
+          </div>
         </animated.div>
-      </div>
-
-      {/* Home, Contact, About, Signup */}
-      <div className="flex space-x-6 text-sm">
-        <p>Home</p>
-        <p>Contact</p>
-        <p>About</p>
-        <p>Signup</p>
-      </div>
-
-      {/* Search Bar, Love Icon, Cart Icon */}
-      <div className="flex items-center space-x-6">
-        <div className="relative">
-          <input
-            type="text"
-              placeholder="What are you looking for"
-            value=""
-            className="pl-4 pr-16 py-2 border text-xs border-gray-300 rounded focus:outline-none focus:border-blue-500 "
-          />
-          <span className="absolute right-3 transform icon-[mingcute--search-line] text-gray-500 lg:h-5 lg:w-5 top-1/4"></span>
-        </div>
-        <span className="lg:h-5 lg:w-5 cursor-pointer icon-[mdi--heart-outline] "></span>
-        <span className="lg:h-5 lg:w-5 cursor-pointer icon-[ion--cart-outline] "></span>
-          {userMenu}
       </div>
     </nav>
   );
 };
-
 
 export default NavigationBar;
 

@@ -1,264 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
+import '../styles/input.css'; // Adjust the path based on your actual directory structure
 
-interface BannerProps {
-  bannerIsExclusiveOpen: boolean;
-  setBannerIsExclusiveOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const BannerComponent: React.FC<BannerProps> = ({ bannerIsExclusiveOpen, setBannerIsExclusiveOpen }) => {
-  const [bannerIndex, setBannerIndex] = useState(0);
-
+const YourComponent = () => {
+  const backgrounds = ['background', 'background1', 'background2', 'background3', 'background4'];
+  const [currentBackground, setCurrentBackground] = useState('background');
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      setBannerIndex((prevIndex) => (prevIndex + 1) % banners.length);
+      const currentIndex = backgrounds.indexOf(currentBackground);
+      const nextIndex = (currentIndex + 1) % backgrounds.length;
+      setCurrentBackground(backgrounds[nextIndex]);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []); // Run this effect only once on component mount
+  }, [currentBackground]);
 
-  useEffect(() => {
-    console.log("Banner isExclusiveOpen:", bannerIsExclusiveOpen);
-    // Update your animation or take any action based on bannerIsExclusiveOpen
-  }, [bannerIsExclusiveOpen]);
-
-  const bannerWidthAnimation = useSpring({
-    width: bannerIsExclusiveOpen ? '60rem' : '100vw',
-    config: { tension: 0, friction: 0 },
-  });
-  const bannermtAnimation = useSpring({
-    marginTop: bannerIsExclusiveOpen ? '2rem' : '0', // Adjusted from '8' to '8rem'
-    config: { tension: 0, friction: 0 },
-  });
+  const project =  (
+      <div className="-mt-10 sm:mt-16 grid grid-cols-1 mx-auto max-w-[50rem] md:grid-cols-3 gap-8 p-8 text-center">
+        {/* Division One */}
+        <div className="flex flex-col items-center bg-white sm:px-6 sm:py-20 py-6 mx-12 sm:mx-0 lg:mx-0 rounded-lg shadow-lg  justify-center transform transition-transform hover:scale-105">
+          <h2 className="text-xl sm:text-xl font-bold mb-4">Project Plan</h2>
+          <p className="text-xs sm:text-xs mb-4 w-4/5">There are many variations of the lorem ipsum from available majority</p>
+          <a href="servicesingle.html">
+            <button className="flex gap-x-2 hover:bg-gray-700 text-sm hover:text-white text-black font-bold py-2 px-4 rounded-lg">
+              Read More
+              <span className="mt-[0.3rem] sm:mt-[0.3rem] icon-[solar--arrow-right-linear] w-4 h-4 "></span>
+            </button>
+          </a>
+        </div>
   
-  const bannermlAnimation = useSpring({
-    marginLeft: bannerIsExclusiveOpen ? '0' : '0', // Adjusted from '8' to '8rem'
-    config: { tension: 0, friction: 0 },
-  });
-  const circlePositionAnimation = useSpring({
-    top: bannerIsExclusiveOpen ? '20.5rem' : '19rem', // Adjust values as needed
-    config: { tension: 0, friction: 0 },
-  });
-
-  const banner1Animation = useSpring({ opacity: bannerIndex === 0 ? 1 : 0, from: { opacity: 0 } });
-  const banner2Animation = useSpring({ opacity: bannerIndex === 1 ? 1 : 0, from: { opacity: 0 } });
-  const banner3Animation = useSpring({ opacity: bannerIndex === 2 ? 1 : 0, from: { opacity: 0 } });
-  const banner4Animation = useSpring({ opacity: bannerIndex === 3 ? 1 : 0, from: { opacity: 0 } });
-  const banner5Animation = useSpring({ opacity: bannerIndex === 4 ? 1 : 0, from: { opacity: 0 } });
-
-  const banner1 = (
-    <animated.div
-    style={{ ...bannerWidthAnimation, ...banner1Animation, ...bannermtAnimation, ...bannermlAnimation }}
-      className="flex items-center justify-around overflow-hidden  absolute py-12 w-screen  right-0 bg-black text-white px-4"
-    >
-      {/* Rest of your component remains unchanged */}
-      <div className="">
-        {/* Logo and Business Name */}
-        <div className="flex gap-x-4 items-center mb-8">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-            alt="Epiphany Logo"
-            className="h-10 w-10 rounded-full  mr-2"
-          />
-          <h2 className="text-md md:text-md lg:text-md text-white/50 font-bold">Epiphany Health series</h2>
+        {/* Division Two */}
+        <div className="flex flex-col items-center bg-white sm:px-6 sm:py-20 py-6 mx-12 sm:mx-0 lg:mx-0 rounded-lg shadow-lg  justify-center transform transition-transform hover:scale-105">
+          <h2 className="text-xl sm:text-xl font-bold mb-4">Interior work</h2>
+          <p className="w-4/5 sm:text-xs text-xs mb-4">There are many variations of the lorem ipsum from available majority</p>
+          <button className="flex gap-x-2 hover:bg-gray-700 text-sm text-black hover:text-white font-bold py-2 px-4 rounded-lg">
+            Read More
+            <span className="mt-[0.3rem] sm:mt-[0.3rem] icon-[solar--arrow-right-linear] w-4 h-4  "></span>
+          </button>
         </div>
-        {/* Business Description */}
-        <p className="text-lg md:text-xl lg:text-3xl mb-8 font-medium">
-          Embrace a thegrher <br />
-          <span className="pt-16">lifestyle with Epiphany1. </span>
-        </p>
-        <button className="text-white px-8 py-3 text-lg rounded-full flex items-center gap-x-4">
-          <span className="flex flex-col">
-            <span>Shop Now </span>
-            <p className="bg-white w-32 h-0.5"></p>
-          </span>
-          <span className="icon-[lucide--arrow-right] h-5 w-5 "> </span>
-        </button>
-      </div>
-      <img
-        src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-        alt="Banner"
-        className="w-[30rem] h-auto "
-      />
-    </animated.div>
-  );
-  const banner2 = (
-    <animated.div
-    style={{ ...bannerWidthAnimation, ...banner2Animation, ...bannermtAnimation, ...bannermlAnimation }}
-    className="flex items-center justify-around overflow-hidden  absolute py-12 w-screen  right-0 bg-black text-white px-4"
-  >
-      {/* Rest of your component remains unchanged */}
-      <div className="">
-        {/* Logo and Business Name */}
-        <div className="flex gap-x-4 items-center mb-8">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-            alt="Epiphany Logo"
-            className="h-10 w-10 rounded-full  mr-2"
-          />
-          <h2 className="text-md md:text-md lg:text-md text-white/50 font-bold">Epiphany Health series</h2>
-        </div>
-        {/* Business Description */}
-        <p className="text-lg md:text-xl lg:text-3xl mb-8 font-medium">
-          Embrace a healthier <br />
-          <span className="pt-16">lifestyle with Epiphany2. </span>
-        </p>
-        <button className="text-white px-8 py-3 text-lg rounded-full flex items-center gap-x-4">
-          <span className="flex flex-col">
-            <span>Shop Now </span>
-            <p className="bg-white w-32 h-0.5"></p>
-          </span>
-          <span className="icon-[lucide--arrow-right] h-5 w-5 "> </span>
-        </button>
-      </div>
-      <img
-        src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-        alt="Banner"
-        className="w-[30rem] h-auto "
-      />
-    </animated.div>
-  );
-  const banner3 = (
-    <animated.div
-    style={{ ...bannerWidthAnimation, ...banner3Animation, ...bannermtAnimation, ...bannermlAnimation }}
-    className="flex items-center justify-around overflow-hidden  absolute py-12 w-screen  right-0 bg-black text-white px-4"
-  >
-      {/* Rest of your component remains unchanged */}
-      <div className="">
-        {/* Logo and Business Name */}
-        <div className="flex gap-x-4 items-center mb-8">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-            alt="Epiphany Logo"
-            className="h-10 w-10 rounded-full  mr-2"
-          />
-          <h2 className="text-md md:text-md lg:text-md text-white/50 font-bold">Epiphany Health series</h2>
-        </div>
-        {/* Business Description */}
-        <p className="text-lg md:text-xl lg:text-3xl mb-8 font-medium">
-          Embrace a healthier <br />
-          <span className="pt-16">lifestyle with Epiphany3. </span>
-        </p>
-        <button className="text-white px-8 py-3 text-lg rounded-full flex items-center gap-x-4">
-          <span className="flex flex-col">
-            <span>Shop Now </span>
-            <p className="bg-white w-32 h-0.5"></p>
-          </span>
-          <span className="icon-[lucide--arrow-right] h-5 w-5 "> </span>
-        </button>
-      </div>
-      <img
-        src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-        alt="Banner"
-        className="w-[30rem] h-auto "
-      />
-    </animated.div>
-  );
-  const banner4 = (
-    <animated.div
-    style={{ ...bannerWidthAnimation, ...banner4Animation, ...bannermtAnimation, ...bannermlAnimation }}
-    className="flex items-center justify-around overflow-hidden  absolute py-12 w-screen  right-0 bg-black text-white px-4"
-  >
-      {/* Rest of your component remains unchanged */}
-      <div className="">
-        {/* Logo and Business Name */}
-        <div className="flex gap-x-4 items-center mb-8">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-            alt="Epiphany Logo"
-            className="h-10 w-10 rounded-full  mr-2"
-          />
-          <h2 className="text-md md:text-md lg:text-md text-white/50 font-bold">Epiphany Health series</h2>
-        </div>
-        {/* Business Description */}
-        <p className="text-lg md:text-xl lg:text-3xl mb-8 font-medium">
-          Embrace a healthier <br />
-          <span className="pt-16">lifestyle with Epiphany4. </span>
-        </p>
-        <button className="text-white px-8 py-3 text-lg rounded-full flex items-center gap-x-4">
-          <span className="flex flex-col">
-            <span>Shop Now </span>
-            <p className="bg-white w-32 h-0.5"></p>
-          </span>
-          <span className="icon-[lucide--arrow-right] h-5 w-5 "> </span>
-        </button>
-      </div>
-      <img
-        src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-        alt="Banner"
-        className="w-[30rem] h-auto "
-      />
-    </animated.div>
-  );
-  const banner5 = (
-    <animated.div
-    style={{ ...bannerWidthAnimation, ...banner5Animation, ...bannermtAnimation, ...bannermlAnimation }}
-    className="flex items-center justify-around overflow-hidden  absolute py-12 w-screen  right-0 bg-black text-white px-4"
-  >
-      {/* Rest of your component remains unchanged */}
-      <div className="">
-        {/* Logo and Business Name */}
-        <div className="flex gap-x-4 items-center mb-8">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-            alt="Epiphany Logo"
-            className="h-10 w-10 rounded-full  mr-2"
-          />
-          <h2 className="text-md md:text-md lg:text-md text-white/50 font-bold">Epiphany Health series</h2>
-        </div>
-        {/* Business Description */}
-        <p className="text-lg md:text-xl lg:text-3xl mb-8 font-medium">
-          Embrace a healthier <br />
-          <span className="pt-16">lifestyle with Epiphany5. </span>
-        </p>
-        <button className="text-white px-8 py-3 text-lg rounded-full flex items-center gap-x-4">
-          <span className="flex flex-col">
-            <span>Shop Now </span>
-            <p className="bg-white w-32 h-0.5"></p>
-          </span>
-          <span className="icon-[lucide--arrow-right] h-5 w-5 "> </span>
-        </button>
-      </div>
-      <img
-        src="https://drive.google.com/uc?export=view&id=1C3oSuF-HK9IlyTlo4gLYGym1LuejiFRS"
-        alt="Banner"
-        className="w-[30rem] h-auto "
-      />
-    </animated.div>
-  );
   
-
-
-  // Repeat the structure for banner2, banner3, banner4, and banner5
-
-  const banners = [banner1, banner2, banner3, banner4, banner5];
-const circle = (
-  <animated.div
-    style={{ ...bannerWidthAnimation, ...circlePositionAnimation }}
-    className="flex justify-center  absolute w-screen right-0 px-4 gap-x-4"
-  >
-    {banners.map((banner, index) => (
-      <span
-        key={index}
-        className={`icon-[bxs--circle] ${index === bannerIndex ? 'text-red-500' : 'text-white/50'} h-3 w-3`}
-      ></span>
-    ))}
-  </animated.div>
-);
-
-  return <div className="relative  border  border-t-black">
-  {banners}
-  {circle}
-  </div>;
+        {/* Division Three */}
+        <div className="flex flex-col items-center bg-white sm:px-6 sm:py-20 py-6 mx-12 sm:mx-0 lg:mx-0 rounded-lg shadow-lg  justify-center transform transition-transform hover:scale-105">
+          <h2 className="text-xl sm:text-xl font-bold mb-4">Realization</h2>
+          <p className="w-4/5 text-xs sm:text-xs mb-4">There are many variations of the lorem ipsum from available majority</p>
+          <button className="flex gap-x-2 hover:bg-gray-700 text-sm hover:text-white text-black font-bold py-2 px-4 rounded-lg">
+            Read More
+            <span className="mt-[0.3rem] sm:mt-[0.3rem] icon-[solar--arrow-right-linear] w-4 h-4 "></span>
+          </button>
+        </div>
+      </div>
+    );
+  
+  return (
+    <div>
+    <div className={`flex mb-4 justify-center w-full text-amber-400 ${currentBackground}`}>
+      <div className={`flex justify-center flex-col pt-8 h-[28rem] sm:h-[30rem] w-11/12 rounded-bl-[10rem] mb-16 overflow-hidden`}>
+        <div className={`bg-white bg-opacity-60 p-4 sm:p-8 ml-4 sm:ml-8 lg:ml-40 lg:mt-28 text-black shadow-sm w-11/12 sm:w-7/12 lg:w-6/12  rounded-tl-[2rem] rounded-br-[3rem] sm:rounded-tl-[4rem] sm:rounded-br-[5rem]`}>
+          <h1 className="text-3xl sm:text-5xl Font1 w-10/12 sm:w-4/5 lg:w-3/5">
+            Let your Home be unique 
+          </h1>
+          <p className="sm:mt-3 text-md w-4/5 sm:text-xl sm:w-[18rem]">
+            There are many variations of lorem ipsum available.
+          </p>
+          <button className="mt-2 w-[8rem] sm:w-[8rem] text-[0.8rem] sm:text-sm flex gap-x-2 bg-gray-800 hover:bg-blue-700 text-white font-bold py-3 sm:py-4 sm:pl-4 pl-4 rounded-md sm:rounded-md">
+            Get Started
+            <span className="mt-[0.1rem] sm:mt-[0.1rem] icon-[solar--arrow-right-linear] w-4 h-4 text-white"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    {project}
+    </div>
+  );
 };
 
-export default BannerComponent;
-
-  
-  
-  
-  
-
-
-  
-
+export default YourComponent;

@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.background {
+  @apply bg-[url('../assets/images/banner.jpg')] bg-cover bg-no-repeat lg:bg-center
+}
+.background4 {
+  @apply bg-[url('../assets/images/Concept.jpg')] bg-cover bg-no-repeat lg:bg-center
+}
+.project-banner {
+  @apply bg-[url('../assets/images/other4.jpeg')] bg-cover bg-no-repeat 
+}
+.project-search {
+  @apply bg-[url('../assets/images/other5.jpg')] bg-cover bg-no-repeat 
+}
+.contact {
+  @apply bg-[url('../assets/images/contact.jpg')] bg-cover bg-no-repeat 
+}
+.contact-banner {
+  @apply bg-[url('../assets/images/other6.jpg')] bg-cover bg-no-repeat 
+}
+.faq-banner {
+  @apply bg-[url('../assets/images/other4.jpeg')] bg-cover bg-no-repeat 
+}
+.service {
+  @apply bg-[url('../assets/images/Blog.jpeg')] bg-cover bg-no-repeat 
+}
+.background1 {
+  @apply bg-[url('../assets/images/Ideas.jpg')] bg-cover bg-no-repeat bg-center
+}
+.blog1 {
+  @apply bg-[url('../assets/images/Blog.jpeg')] bg-cover bg-no-repeat bg-center
+}
+.blog2 {
+  @apply bg-[url('../assets/images/blog-2.jpeg')] bg-cover bg-no-repeat bg-center
+}
+.blog3 {
+  @apply bg-[url('../assets/images/blog-3.jpeg')] bg-cover bg-no-repeat bg-center
+}
+.blog4 {
+  @apply bg-[url('../assets/images/blog-4.jpeg')] bg-cover bg-no-repeat bg-center
+}
+.blog5 {
+  @apply bg-[url('../assets/images/blog-5.jpeg')] bg-cover bg-no-repeat bg-center
+}
+.blog6 {
+  @apply bg-[url('../assets/images/blog-6.jpg')] bg-cover bg-no-repeat bg-center
+}
+.background2 {
+  @apply bg-[url('../assets/images/design.jpg')] bg-cover bg-no-repeat lg:bg-center
+}
+.background3 {
+  @apply bg-[url('../assets/images/Perfect.jpg')] bg-cover bg-no-repeat  lg:bg-center
+}
+.background5 {
+  @apply bg-[url('../assets/images/banner3.jpg')] bg-cover bg-no-repeat 
+}
+.background6 {
+  @apply bg-[url('../assets/images/banner4.jpg')] bg-cover bg-no-repeat
+}
+.team-background {
+  @apply bg-[url('../assets/images/team-banner.jpg')] bg-cover bg-no-repeat
+}
+.blog-background {
+  @apply bg-[url('../assets/images/blog-details-banner.jpg')] bg-cover bg-no-repeat
+}
+.about-background {
+  @apply bg-[url('../assets/images/blog-details-1.jpeg')] bg-cover bg-no-repeat
+}
+
+
+
+.Font1 {
+  font-family: Font1;
+}
+@font-face {
+  font-family:'Font1';
+  src: url('../assets/Fonts/Begum W03 Semibold.otf');
+}
